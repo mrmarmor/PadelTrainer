@@ -1,0 +1,2 @@
+/Users/admin/StudioProjects/PadelTrainer/build/.cxx/debug/373z6k33/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/admin/StudioProjects/PadelTrainer/build/.cxx/debug/373z6k33/armeabi-v7a/CMakeFiles/rebuild_cache.dir

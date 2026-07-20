@@ -1,0 +1,1 @@
+ /Users/admin/StudioProjects/PadelTrainer/.dart_tool/flutter_build/fa19c5b2607702e4bd6adf5f0711598e/native_assets.json: 

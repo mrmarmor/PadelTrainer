@@ -1,0 +1,1 @@
+/Users/admin/StudioProjects/PadelTrainer/build/app/intermediates/cxx/debug/373z6k33/obj/arm64-v8a
