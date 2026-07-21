@@ -104,7 +104,10 @@ class SettingsForm extends StatelessWidget {
                   'סוג מכה',
                   settings.strokeType,
                   StrokeType.values,
-                  (val) => settings.strokeType = val!,
+                  (val) {
+                    debugPrint('UI: StrokeType changed to $val');
+                    settings.strokeType = val!;
+                  },
                   (val) => val.label,
                 ),
                 
@@ -112,11 +115,14 @@ class SettingsForm extends StatelessWidget {
                   'מצב',
                   settings.playMode,
                   PlayMode.values,
-                  (val) => settings.playMode = val!,
+                  (val) {
+                    debugPrint('UI: PlayMode changed to $val');
+                    settings.playMode = val!;
+                  },
                   (val) => val.label,
                 ),
                 
-                _buildDropdown<Direction>(
+                /*_buildDropdown<Direction>(
                   'כיוון',
                   settings.direction,
                   Direction.values,
@@ -138,13 +144,16 @@ class SettingsForm extends StatelessWidget {
                   Height.values,
                   (val) => settings.height = val!,
                   (val) => val.label,
-                ),
+                ),*/
 
                 _buildDropdown<SideDistribution>(
                   'חלוקת צד',
                   settings.sideDistribution,
                   SideDistribution.values,
-                      (val) => settings.sideDistribution = val!,
+                      (val) {
+                        debugPrint('UI: SideDistribution changed to $val');
+                        settings.sideDistribution = val!;
+                      },
                       (val) => val.label,
                 ),
 
@@ -152,25 +161,68 @@ class SettingsForm extends StatelessWidget {
                   'צד',
                   settings.side,
                   ServeSide.values,
-                      (val) => settings.side = val!,
+                      (val) {
+                        debugPrint('UI: ServeSide changed to $val');
+                        settings.side = val!;
+                      },
                       (val) => val.label,
                 ),
 
                 const SizedBox(height: 10),
-                Text('מהירות: ${(settings.speed * 100).toInt()}%'),
+                Text('כיוון: ${settings.direction}'),
+                Slider(
+                  value: settings.direction,
+                  min: 210, max: 2070, divisions: 62,
+                  onChanged: (val) {
+                    debugPrint('UI: Direction changed to $val');
+                    settings.direction = val;
+                  },
+                ),
+
+                const SizedBox(height: 10),
+                Text('Spin: ${settings.spin}'),
+                Slider(
+                  value: settings.spin,
+                  min: 0, max: 30, divisions: 3,
+                  onChanged: (val) {
+                    debugPrint('UI: Spin changed to $val');
+                    settings.spin = val;
+                  },
+                ),
+
+                const SizedBox(height: 10),
+                Text('גובה: ${settings.height}'),
+                Slider(
+                  value: settings.height,
+                  min: 300, max: 4200, divisions: 13,
+                  onChanged: (val) {
+                    debugPrint('UI: Height changed to $val');
+                    settings.height = val;
+                  },
+                ),
+
+                const SizedBox(height: 10),
+                Text('מהירות: ${settings.speed}'),
                 Slider(
                   value: settings.speed,
-                  onChanged: (val) => settings.speed = val,
+                  min: 80, max: 180, divisions: 10,
+                  onChanged: (val) {
+                    debugPrint('UI: Speed changed to $val');
+                    settings.speed = val;
+                  },
                 ),
 
                 const SizedBox(height: 10),
                 Text('זמן בין כדור לכדור: ${settings.timeInterval} שניות'),
                 Slider(
-                  value: settings.timeInterval.toDouble(),
-                  min: 1,
-                  max: 5,
-                  divisions: 4,
-                  onChanged: (val) => settings.timeInterval = val.toInt(),
+                  value: settings.timeInterval,
+                  min: 1.8,
+                  max: 8.8,
+                  divisions: 70,
+                  onChanged: (val) {
+                    debugPrint('UI: TimeInterval changed to $val');
+                    settings.timeInterval = val;
+                  },
                 ),
 
                 const SizedBox(height: 10),
@@ -179,7 +231,10 @@ class SettingsForm extends StatelessWidget {
                   value: settings.ballCount.toDouble(),
                   min: 1,
                   max: 50,
-                  onChanged: (val) => settings.ballCount = val.toInt(),
+                  onChanged: (val) {
+                    debugPrint('UI: BallCount changed to $val');
+                    settings.ballCount = val.toInt();
+                  },
                 ),
               ],
             );
@@ -243,7 +298,13 @@ class ConnectionCard extends StatelessWidget {
                     ElevatedButton(
                       onPressed: ble.isScanning 
                         ? null 
-                        : (isConnected ? ble.disconnect : ble.startScan),
+                        : (isConnected ? () {
+                            debugPrint('UI: Disconnect button pressed');
+                            ble.disconnect();
+                          } : () {
+                            debugPrint('UI: Connect button pressed');
+                            ble.startScan();
+                          }),
                       child: Text(isConnected ? 'התנתק' : 'התחבר'),
                     ),
                   ],
@@ -280,13 +341,19 @@ class ActionButtons extends StatelessWidget {
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                 ),
-                onPressed: isConnected ? () => ble.sendSettings(settings) : null,
+                onPressed: isConnected ? () {
+                  debugPrint('UI: Send to machine button pressed');
+                  ble.sendSettings(settings);
+                } : null,
                 child: const Text('שלח למכונה', style: TextStyle(fontSize: 18)),
               ),
             ),
             const SizedBox(width: 10),
             IconButton.filled(
-              onPressed: isConnected ? ble.stopMachine : null,
+              onPressed: isConnected ? () {
+                debugPrint('UI: Stop machine button pressed');
+                ble.stopMachine();
+              } : null,
               icon: const Icon(Icons.stop),
               color: Colors.white,
               iconSize: 30,

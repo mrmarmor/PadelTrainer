@@ -48,7 +48,7 @@ extension PlayModeHebrew on PlayMode {
   }
 }
 
-enum Direction {
+/*enum Direction {
   straight,
   diagonal,
   lineToLine
@@ -80,9 +80,9 @@ extension SpinHebrew on Spin {
       case Spin.topHeavy: return 'טופספין כבד';
     }
   }
-}
+}*/
 
-enum Height {
+/*enum Height {
   low,
   medium,
   high
@@ -96,7 +96,7 @@ extension HeightHebrew on Height {
       case Height.high: return 'גבוה';
     }
   }
-}
+}*/
 
 enum SideDistribution {
   forehandOnly,
@@ -133,42 +133,82 @@ extension ServeSideHebrew on ServeSide {
 class PadelMachineSettings extends ChangeNotifier {
   StrokeType _strokeType = StrokeType.forehand;
   PlayMode _playMode = PlayMode.withWall;
-  Direction _direction = Direction.straight;
-  double _speed = 0.5;
-  Spin _spin = Spin.none;
-  Height _height = Height.medium;
-  int _timeInterval = 2;
+  double _direction = 1140;//210-2070
+  double _speed = 130;//80-180
+  double _spin = 10;//0-30
+  double _height = 2000;//300-4200
+  double _timeInterval = 4;//1.8-8
   int _ballCount = 10;
   SideDistribution _sideDistribution = SideDistribution.random;
   ServeSide _side = ServeSide.right;
 
   StrokeType get strokeType => _strokeType;
-  set strokeType(StrokeType val) { _strokeType = val; notifyListeners(); }
+  set strokeType(StrokeType val) { 
+    debugPrint('Model: Setting strokeType to $val');
+    _strokeType = val; 
+    notifyListeners(); 
+  }
 
   PlayMode get playMode => _playMode;
-  set playMode(PlayMode val) { _playMode = val; notifyListeners(); }
+  set playMode(PlayMode val) { 
+    debugPrint('Model: Setting playMode to $val');
+    _playMode = val; 
+    notifyListeners(); 
+  }
 
-  Direction get direction => _direction;
-  set direction(Direction val) { _direction = val; notifyListeners(); }
+  double get direction => _direction;
+  set direction(double val) { 
+    debugPrint('Model: Setting direction to $val');
+    _direction = val; 
+    notifyListeners(); 
+  }
 
   double get speed => _speed;
-  set speed(double val) { _speed = val; notifyListeners(); }
+  set speed(double val) { 
+    debugPrint('Model: Setting speed to $val');
+    _speed = val; 
+    notifyListeners(); 
+  }
 
-  Spin get spin => _spin;
-  set spin(Spin val) { _spin = val; notifyListeners(); }
+  double get spin => _spin;
+  set spin(double val) { 
+    debugPrint('Model: Setting spin to $val');
+    _spin = val; 
+    notifyListeners(); 
+  }
 
-  Height get height => _height;
-  set height(Height val) { _height = val; notifyListeners(); }
+  double get height => _height;
+  set height(double val) { 
+    debugPrint('Model: Setting height to $val');
+    _height = val; 
+    notifyListeners(); 
+  }
 
-  int get timeInterval => _timeInterval;
-  set timeInterval(int val) { _timeInterval = val; notifyListeners(); }
+  double get timeInterval => _timeInterval;
+  set timeInterval(double val) { 
+    debugPrint('Model: Setting timeInterval to $val');
+    _timeInterval = val; 
+    notifyListeners(); 
+  }
 
   int get ballCount => _ballCount;
-  set ballCount(int val) { _ballCount = val; notifyListeners(); }
+  set ballCount(int val) { 
+    debugPrint('Model: Setting ballCount to $val');
+    _ballCount = val; 
+    notifyListeners(); 
+  }
 
   SideDistribution get sideDistribution => _sideDistribution;
-  set sideDistribution(SideDistribution val) { _sideDistribution = val; notifyListeners(); }
+  set sideDistribution(SideDistribution val) { 
+    debugPrint('Model: Setting sideDistribution to $val');
+    _sideDistribution = val; 
+    notifyListeners(); 
+  }
 
   ServeSide get side => _side;
-  set side(ServeSide val) { _side = val; notifyListeners(); }
+  set side(ServeSide val) { 
+    debugPrint('Model: Setting side to $val');
+    _side = val; 
+    notifyListeners(); 
+  }
 }
